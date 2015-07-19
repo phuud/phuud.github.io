@@ -1,7 +1,8 @@
 # Site settings
-title: "phuud's Blog"
+title: "phuud | 浅斟低唱"
+name: "Phuud's Info"
 email: jacob@jacobtomlinson.co.uk
-description: "A dark blog theme for Jekyll."
+description: "Phuud's personal blog."
 baseurl: ""
 url: "http://carte-noire.jacobtomlinson.co.uk/"
 title_description: "A dark flame master"
@@ -20,7 +21,7 @@ google_plus_link: http://bilibili.tv/
 stackoverflow_link: http://weibo.com/
 
 # Footer
-footer_left: "Copyright &copy; 2015,<a href=\"http://twitter.com/zuxic\">Phuud Wang</a>.Hosted by <i class=\"fa fa-github-alt\"></i> <a href=\"https://github.com\"><b>GitHub</b></a>."
+footer_left: "&copy; 2015,<a href=\"http://twitter.com/zuxic\"><b>Phuud Wang</b></a>. Hosted by <i class=\"fa fa-github-alt\"></i> <a href=\"https://github.com\"><b>GitHub</b></a>."
 footer_right: "Powered by <a href=\"http://github.com/mojombo/jekyll\"target='_blank'><b>Jekyll</b></a> and <a href=\"https://github.com/jacobtomlinson/carte-noire\"target='_blank'><b>Jacob Tomlinson</b></a>."
 
 # Build settings
