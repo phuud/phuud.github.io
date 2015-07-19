@@ -1,24 +1,20 @@
 # Site settings
 title: "phuud | 浅斟低唱"
-name: "Phuud's Info"
-email: jacob@jacobtomlinson.co.uk
+name: "「Phuud's Info」"
+email: phuud@163.com
 description: "Phuud's personal blog."
 baseurl: ""
-url: "http://carte-noire.jacobtomlinson.co.uk/"
+url: "http://phuud.info/"
 title_description: "A dark flame master"
-title_image: "public/img/img01.jpg"
-google_analytics: "UA-20365477-4"
-disqus_account: cartenoire
-github_repository: https://github.com/jacobtomlinson/carte-noire
-addthis_id: ra-513c6fa83da6ec67
+title_image: "img/img01.jpg"
+github_repository: https://github.com/phuud/phuud.github.io
 post_limit: 5
 
 # Social usernames/URLs
 twitter_username: zuxic
 github_username: phuud
-linkedin_link: http://bgm.tv/
-google_plus_link: http://bilibili.tv/
-stackoverflow_link: http://weibo.com/
+instagram_username: zuxic
+bangumi_link: http://bangumi.tv/user/40422
 
 # Footer
 footer_left: "&copy; 2015,<a href=\"http://twitter.com/zuxic\"><b>Phuud Wang</b></a>. Hosted by <i class=\"fa fa-github-alt\"></i> <a href=\"https://github.com\"><b>GitHub</b></a>."
