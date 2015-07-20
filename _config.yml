@@ -6,7 +6,7 @@ description: "Phuud's personal blog."
 baseurl: ""
 url: "http://phuud.info/"
 title_description: "A dark flame master"
-title_image: "img/img01.jpg"
+title_image: "img/phuud.jpg"
 github_repository: https://github.com/phuud/phuud.github.io
 post_limit: 5
 
