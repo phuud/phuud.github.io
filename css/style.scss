@@ -5,16 +5,22 @@
 @import url(http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700);
 
 /* Colours */
-$twitter:        #6dabda;
+$fa-blue:        #6dabda;
+/*
+-------------------------
 $linkedin:       #2b77b1;
 $google-plus:    #c95644;
 $github:         #f6c2a4;
 $stack-overflow: #c98b3b;
 $rss:            #eea33a;
+-------------------------
+*/
 
+$border:         #fa8b60;
+$sky-blue:       #1fda9a;
 $darker:         #21211E;
-$dark:           #2D2D29;
-$medium:         #3B3B35;
+$dark:           #2D2D29;/*没用上*/
+$medium:         #b6a754/*3B3B35*/;
 $light-medium:   #969696;
 $dark-blue:      #215A6D;
 $light-blue:     #3CA2A2;
@@ -42,7 +48,7 @@ html {
 body {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-	background-color: $dark;
+	background-color: $sky-blue;
 	color: $white;
 	font-size: 16px;
 	height: 100%;
@@ -50,7 +56,7 @@ body {
 }
 
 a, a:active {
-	color: $light-blue;
+	color: $white/*light-blue*/;
 	text-decoration: none;
 }
 
@@ -106,6 +112,27 @@ ul {
 	}
 }
 
+.home-button {
+	color: $white;
+	font-size: 24px;
+	position: fixed;
+	top: 10px;
+	left: 20px;
+	cursor: pointer;
+	line-height: 1em;
+	padding: 10px;
+	background-color: $sky-blue;
+	z-index: 100;
+	@media (min-width: $screen-sm-min) {
+		top: 20px;
+		left: 80px;
+	}
+}
+
+.home-button :hover {
+		color: $dark-blue;
+}
+
 .menu-button {
 	color: $white;
 	font-size: 24px;
@@ -115,12 +142,16 @@ ul {
 	cursor: pointer;
 	line-height: 1em;
 	padding: 10px;
-	background-color: $dark;
+	background-color: $sky-blue;
 	z-index: 100;
 	@media (min-width: $screen-sm-min) {
 		top: 20px;
 		left: 40px;
 	}
+}
+
+.menu-button :hover {
+		color: $dark-blue;
 }
 
 .content-panel {
@@ -131,10 +162,29 @@ ul {
 	padding-right: 30px;
 	margin-top: 20px;
 	box-shadow: 0px 0px 0px 0px, 0px 6px 12px rgba(0, 0, 0, 0.2);
-	border-bottom: 5px solid $light-blue;
+	border-bottom: 5px solid $border/*light-blue*/;
 }
 
 #my-menu {
+
+    .logo {
+	    color: $white;
+	}
+	
+    .logo img {
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 10px;
+        border: 4px solid $light-medium;
+        border-radius: 28px;
+        transition: all 0.5s ease-in 0;
+    }
+	
+   .logo img:hover,:focus {
+        border: 4px solid $medium;
+        /*border-radius: 3px;
+        transform: rotate(360deg);*/
+    }
 
 	p {
 		margin-bottom: 5px;
@@ -154,6 +204,11 @@ ul {
 			margin-right: 10px;
 		}
 	}
+	
+	.about{
+	margin-top: 10px;
+	text-align: center;
+    }
 }
 
 .links {
@@ -175,29 +230,9 @@ ul {
 		-moz-transition: 0.3s;
 		transition: 0.3s;
 	}
-
-	.fa-twitter:hover {
-		color: $twitter;
-	}
-
-	.fa-linkedin:hover {
-		color: $linkedin;
-	}
-
-	.fa-google-plus:hover {
-		color: $google-plus;
-	}
-
-	.fa-github-alt:hover {
-		color: $github;
-	}
-
-	.fa-stack-overflow:hover {
-		color: $stack-overflow;
-	}
-
-	.fa-rss:hover {
-		color: $rss;
+	
+	.fa:hover {
+		color: $fa-blue;
 	}
 }
 
@@ -228,15 +263,15 @@ ul {
 	}
 
 	.content-panel:nth-of-type(1) {
-		border-bottom: 10px solid $light-blue;
+		border-bottom: 10px solid $border/*light-blue*/;
 	}
 
 	.author-header {
-		font-family: 'Montserrat', sans-serif;
-		color: $light-blue;
+		font-family: 'Content-Type', sans-serif;
+		color: $white/*light-blue*/;
 		margin-top: 0px;
 		padding-top: 15px;
-		font-size: 30px;
+		font-size: 25px;
 
 		@media (min-width: $screen-sm-min) {
 			font-size: 52px;
@@ -258,7 +293,11 @@ ul {
 	.gravatar {
 		width: 100%;
 		margin-top: -80px;
-		text-align: center;
+		text-align: center;		
+	}
+	
+	.gravatar img{
+	    border: 10px solid $medium;	
 	}
 
 	.author-text {
@@ -276,7 +315,7 @@ ul {
 
 		h2 {
 			margin-bottom: 30px;
-			color: $light-blue;
+			color: $white/*light-blue*/;
 			font-size: 26px;
 		}
 
@@ -289,14 +328,14 @@ ul {
 				font-size: 24px;
 
 				a:hover {
-					color: $light-medium;
+					color: $dark-blue/*light-medium*/;
 				}
 
 				small {
 					font-size: 14px;
 					margin-top: -10px;
 					padding-top: 0px;
-					color: $light-medium;
+					color: $white/*light-medium*/;
 				}
 
 			}
@@ -315,7 +354,7 @@ ul {
 		}
 
 		a:hover {
-			color: $light-blue;
+			color: $dark-blue;
 		}
 	}
 
@@ -774,7 +813,7 @@ ul {
 	}
 
 	div {
-		color: $light-medium;
+		color: $white/*light-medium*/;
 		text-align: center;
 		margin-top: 20px;
 		margin-bottom: 20px;

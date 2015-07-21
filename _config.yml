@@ -1,14 +1,15 @@
 # Site settings
-title: "phuud | 浅斟低唱"
+title: "Phuud | 浅斟低唱"
 name: "「Phuud's Info」"
 email: phuud@163.com
 description: "Phuud's personal blog."
 baseurl: ""
 url: "http://phuud.info/"
 title_description: "A dark flame master"
-title_image: "img/phuud.jpg"
+title_image: "/img/phuud.jpg"
 github_repository: https://github.com/phuud/phuud.github.io
 post_limit: 5
+
 
 # Social usernames/URLs
 twitter_username: zuxic
@@ -16,9 +17,12 @@ github_username: phuud
 instagram_username: zuxic
 bangumi_link: http://bangumi.tv/user/40422
 
+
 # Footer
 footer_left: "&copy; 2015,<a href=\"http://twitter.com/zuxic\"><b>Phuud Wang</b></a>. Hosted by <i class=\"fa fa-github-alt\"></i> <a href=\"https://github.com\"><b>GitHub</b></a>."
 footer_right: "Powered by <a href=\"http://github.com/mojombo/jekyll\"target='_blank'><b>Jekyll</b></a> and <a href=\"https://github.com/jacobtomlinson/carte-noire\"target='_blank'><b>Jacob Tomlinson</b></a>."
+
+
 
 # Build settings
 markdown: redcarpet

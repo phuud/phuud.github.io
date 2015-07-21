@@ -16,9 +16,11 @@
    $(document).ready(function() {
       $("#my-menu").mmenu().on( "closed.mm", function() {
             $(".menu-button").show();
+			$(".home-button").show();
          });
       $(".menu-button").click(function() {
         $(".menu-button").hide();
+		$(".home-button").hide();
         $("#my-menu").trigger("open.mm");
       });
    });
