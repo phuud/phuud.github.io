@@ -1,11 +1,10 @@
 # Site settings
 title: "Phuud | 浅斟低唱"
-name: "「Phuud's Info」"
-email: phuud@163.com
+name: "「Phuud's Life:」"
 description: "Phuud's personal blog."
 baseurl: ""
 url: "http://phuud.info/"
-title_description: "A dark flame master"
+title_description: "40%捡起来的技术+30%半荒废的ACGMN+20%勉强拿得出手的杂学+10%啥折腾+0%空闲"
 title_image: "/img/phuud.jpg"
 github_repository: https://github.com/phuud/phuud.github.io
 post_limit: 5

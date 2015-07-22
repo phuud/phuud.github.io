@@ -276,7 +276,7 @@ html.mm-opened .mm-page {
   position: relative; }
 
 html.mm-background .mm-page {
-  background: inherit; }
+  background: #b6a754/*inherit*/; }
 
 #mm-blocker {
   background: url(data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==) transparent;
@@ -314,15 +314,15 @@ html.mm-opening .mm-fixed-bottom {
   html.mm-opening .mm-fixed-top,
   html.mm-opening .mm-fixed-bottom {
     left: 140px; } }
-@media all and (min-width: 550px) {
+@media all and (min-width: 400px) {
   .mm-menu {
-    width: 440px; }
+    width: 320px; }
 
   html.mm-opening .mm-page,
   html.mm-opening #mm-blocker,
   html.mm-opening .mm-fixed-top,
   html.mm-opening .mm-fixed-bottom {
-    left: 440px; } }
+    left: 320px; } }
 /*
 	jQuery.mmenu counters addon CSS
 */

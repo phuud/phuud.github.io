@@ -19,7 +19,7 @@ $rss:            #eea33a;
 $border:         #fa8b60;
 $sky-blue:       #1fda9a;
 $darker:         #21211E;
-$dark:           #2D2D29;/*没用上*/
+$dark:           #2D2D29;
 $medium:         #b6a754/*3B3B35*/;
 $light-medium:   #969696;
 $dark-blue:      #215A6D;
@@ -117,15 +117,15 @@ ul {
 	font-size: 24px;
 	position: fixed;
 	top: 10px;
-	left: 20px;
+	left: 50px;
 	cursor: pointer;
 	line-height: 1em;
 	padding: 10px;
-	background-color: $sky-blue;
+	/*background-color: transparent*/;
 	z-index: 100;
 	@media (min-width: $screen-sm-min) {
-		top: 20px;
-		left: 80px;
+		top: 10px;
+		left: 60px;
 	}
 }
 
@@ -138,15 +138,14 @@ ul {
 	font-size: 24px;
 	position: fixed;
 	top: 10px;
-	left: 20px;
+	left: 15px;
 	cursor: pointer;
 	line-height: 1em;
 	padding: 10px;
-	background-color: $sky-blue;
 	z-index: 100;
 	@media (min-width: $screen-sm-min) {
-		top: 20px;
-		left: 40px;
+		top: 10px;
+		left: 20px;
 	}
 }
 
@@ -183,7 +182,7 @@ ul {
    .logo img:hover,:focus {
         border: 4px solid $medium;
         /*border-radius: 3px;
-        transform: rotate(360deg);*/
+        transform: rotate(360deg); 切边效果备用*/
     }
 
 	p {
@@ -287,7 +286,9 @@ ul {
 	.row {
 		height: 100%;
 		max-height: 100%;
-		margin-top: 60px;
+		margin-top: 100px;
+		margin-left: 0px;
+		margin-right: 0px;
 	}
 
 	.gravatar {
@@ -792,10 +793,6 @@ ul {
 .footer {
 	width: 100%;
 	margin-left: 0%;
-
-	.fa-heart {
-		color: $red;
-	}
 
 	@media (min-width: $screen-sm-min) {
 		width: 90%;
