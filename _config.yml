@@ -66,6 +66,14 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+# search
+algolia:
+  applicationID: 'TODO'
+  apiKey: 'TODO'
+  adminApiKey: 'TODO'
+  indexName: 'phuud.info'
+  chunkSize: 5000
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy: git
