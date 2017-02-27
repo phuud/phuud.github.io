@@ -1,9 +1,10 @@
 ---
-title: Deeplink的简单实现
+title: 一种可行的Deeplink简单实现
 date: 2017-02-15 20:57:39
 tags:
-- FrontEnd
+- frontEnd
 - js
+- deeplink
 ---
 
 {% asset_img Deep_Link_Measurement.png   &nbsp;%}
@@ -13,7 +14,7 @@ tags:
 <!-- more -->
 ### 确定方案
 起初，尝试的方案是页面识别设备类型，再根据设备类型调用相应设备APP的URL Schema，Android下直接使用`window.location = URL Schema`的方式，iOS在`window.location`基础上套`setTimeout`，尝试打不开再跳转商店页面的方式，但写完测试发现有几个问题：
-- iOS：Safari打开连接时，若设备已安装APP，需要用户点击Open按钮确认才能打开APP，若设备未安装APP，还会弹出Safari的错误alert，体验很不好；
+- iOS：Safari打开链接时，若设备已安装APP，需要用户点击Open按钮确认才能打开APP，若设备未安装APP，还会弹出Safari的错误alert，体验很不好；
 - Android：Chrome上无法使用`window.location`跳转URL Schema，不能唤醒APP；
 
 针对iOS的问题，光前端这边是没辙了，于是和iOS开发一起做了Universal Link的处理，但因为iOS 9以下设备、未安装APP、链接直接在浏览器中打开等几种情况无法触发Universal Link机制，所以链接在作为Universal Link的同时还指向一个静态页面，带有Smart App Banners，如果检测到已安装APP，还是能点击打开，再显示些广告词下载按钮之类宣传，点击下载按钮跳转App Store；
@@ -83,10 +84,8 @@ function openAppFunc(){
                 $(".downBtn").attr("href","https://Google Play");   //下载按钮指向Google Play
             }
             else if((browser.versions.iPhone || browser.versions.iPad) && browser.versions.mobile){
-                /*
-                    倒也可以在这里调一次iOS的URL schema，但因为没有做延时跳转，设备未安装APP的情况下，Safari的报错无法自动消失
-                    // window.location = appUrl; 
-                */
+                //倒也可以在这里调一次iOS的URL schema，但因为没有做延时跳转，设备未安装APP的情况下，Safari的报错无法自动消失
+                //window.location = appUrl; 
                 $('#downBox').css('display','block');   //显示广告文字和下载按钮
                 $(".downBtn").attr("href","App Store");  //下载按钮指向App Store     
             }
