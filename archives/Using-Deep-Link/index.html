@@ -1,0 +1,920 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="baidu-site-verification" content="3MLaFKv4ra" />
+<meta name="google-site-verification" content="QD1LaGVxa8LYFU1riDIgbi-MuKeZhz18-ssfSAytzR0" />
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="frontEnd,js,deeplink," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前段时间，项目上提了个需求，发给客户的短信要带上一个链接，点击链接时，设备若已安装APP，需要将用户引导至App内的指定页面，若未安装APP，则需要将用户引导至设备相应的商店页面，本以为只是简单Deeplink + URL Schema，但实际上手时发现细节上还是挺麻烦的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一种可行的Deeplink简单实现">
+<meta property="og:url" content="http://blog.phuud.info/archives/Using-Deep-Link/index.html">
+<meta property="og:site_name" content="Phuud's Blog">
+<meta property="og:description" content="前段时间，项目上提了个需求，发给客户的短信要带上一个链接，点击链接时，设备若已安装APP，需要将用户引导至App内的指定页面，若未安装APP，则需要将用户引导至设备相应的商店页面，本以为只是简单Deeplink + URL Schema，但实际上手时发现细节上还是挺麻烦的。">
+<meta property="og:image" content="http://blog.phuud.info/archives/Using-Deep-Link/Deep_Link_Measurement.png">
+<meta property="og:updated_time" content="2017-02-28T07:45:02.518Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一种可行的Deeplink简单实现">
+<meta name="twitter:description" content="前段时间，项目上提了个需求，发给客户的短信要带上一个链接，点击链接时，设备若已安装APP，需要将用户引导至App内的指定页面，若未安装APP，则需要将用户引导至设备相应的商店页面，本以为只是简单Deeplink + URL Schema，但实际上手时发现细节上还是挺麻烦的。">
+<meta name="twitter:image" content="http://blog.phuud.info/archives/Using-Deep-Link/Deep_Link_Measurement.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '04EWBBUWF5',
+      apiKey: 'd0a9a8dcaec5153d37b338558b1ef21c',
+      indexName: 'phuud.info',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.phuud.info/archives/Using-Deep-Link/"/>
+
+
+
+
+
+  <title> 一种可行的Deeplink简单实现 | Phuud's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-92078119-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Phuud's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.phuud.info/archives/Using-Deep-Link/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="phuud">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Phuud's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Phuud's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一种可行的Deeplink简单实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T20:57:39+08:00">
+                2017-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/Using-Deep-Link/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="archives/Using-Deep-Link/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/archives/Using-Deep-Link/" class="leancloud_visitors" data-flag-title="一种可行的Deeplink简单实现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="/archives/Using-Deep-Link/Deep_Link_Measurement.png" alt="&nbsp;" title="&nbsp;">
+<p>前段时间，项目上提了个需求，发给客户的短信要带上一个链接，点击链接时，设备若已安装APP，需要将用户引导至App内的指定页面，若未安装APP，则需要将用户引导至设备相应的商店页面，本以为只是简单Deeplink + URL Schema，但实际上手时发现细节上还是挺麻烦的。</p>
+<a id="more"></a>
+<h3 id="确定方案"><a href="#确定方案" class="headerlink" title="确定方案"></a>确定方案</h3><p>起初，尝试的方案是页面识别设备类型，再根据设备类型调用相应设备APP的URL Schema，Android下直接使用<code>window.location = URL Schema</code>的方式，iOS在<code>window.location</code>基础上套<code>setTimeout</code>，尝试打不开再跳转商店页面的方式，但写完测试发现有几个问题：</p>
+<ul>
+<li>iOS：Safari打开链接时，若设备已安装APP，需要用户点击Open按钮确认才能打开APP，若设备未安装APP，还会弹出Safari的错误alert，体验很不好；</li>
+<li>Android：Chrome上无法使用<code>window.location</code>跳转URL Schema，不能唤醒APP；</li>
+</ul>
+<p>针对iOS的问题，光前端这边是没辙了，于是和iOS开发一起做了Universal Link的处理，但因为iOS 9以下设备、未安装APP、链接直接在浏览器中打开等几种情况无法触发Universal Link机制，所以链接在作为Universal Link的同时还指向一个静态页面，带有Smart App Banners，如果检测到已安装APP，还是能点击打开，再显示些广告词下载按钮之类宣传，点击下载按钮跳转App Store；<br>针对Android的问题，问了下Android的开发，得知使用a标签是可以正常跳转的，所以考虑在链接指向的静态页面页面上写了个假的alert弹框，在检测到设备为Android时显示假弹框，询问用户是否要使用APP打开，Open按钮用a标签跳转URL Schema，Cancel按钮隐藏假弹框显示广告词下载按钮，点击下载按钮跳转Play商店页面；</p>
+<h3 id="设备识别"><a href="#设备识别" class="headerlink" title="设备识别"></a>设备识别</h3><p>js做设备识别目前就是<code>navigator.userAgent</code>、<code>navigator.userAgent</code>，写法多种多样，用得上什么写什么吧<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> browser=&#123;</div><div class="line">    <span class="attr">versions</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> u = navigator.userAgent, app = navigator.appVersion;</div><div class="line">        <span class="keyword">return</span> &#123;<span class="comment">//移动终端浏览器版本信息</span></div><div class="line">            trident: u.indexOf(<span class="string">'Trident'</span>) &gt; <span class="number">-1</span>, <span class="comment">//IE内核</span></div><div class="line">            presto: u.indexOf(<span class="string">'Presto'</span>) &gt; <span class="number">-1</span>, <span class="comment">//opera内核</span></div><div class="line">            webKit: u.indexOf(<span class="string">'AppleWebKit'</span>) &gt; <span class="number">-1</span>, <span class="comment">//苹果、谷歌内核</span></div><div class="line">            gecko: u.indexOf(<span class="string">'Gecko'</span>) &gt; <span class="number">-1</span> &amp;&amp; u.indexOf(<span class="string">'KHTML'</span>) == <span class="number">-1</span>, <span class="comment">//火狐内核</span></div><div class="line">            mobile: !!u.match(<span class="regexp">/AppleWebKit.*Mobile.*/</span>), <span class="comment">//是否为移动终端</span></div><div class="line">            ios: !!u.match(<span class="regexp">/\(i[^;]+;( U;)? CPU.+Mac OS X/</span>), <span class="comment">//ios终端</span></div><div class="line">            android: u.indexOf(<span class="string">'Android'</span>) &gt; <span class="number">-1</span> || u.indexOf(<span class="string">'Linux'</span>) &gt; <span class="number">-1</span>, <span class="comment">//android终端或者uc浏览器</span></div><div class="line">            iPhone: u.indexOf(<span class="string">'iPhone'</span>) &gt; <span class="number">-1</span>, <span class="comment">//是否为iPhone或者QQ HD浏览器</span></div><div class="line">            iPad: u.indexOf(<span class="string">'iPad'</span>) &gt; <span class="number">-1</span>, <span class="comment">//是否iPad</span></div><div class="line">            webApp: u.indexOf(<span class="string">'Safari'</span>) == <span class="number">-1</span>, <span class="comment">//是否web应该程序，没有头部与底部</span></div><div class="line">            wechat: u.indexOf(<span class="string">'MicroMessenger'</span>) &gt; <span class="number">-1</span> <span class="comment">//是否为微信</span></div><div class="line">        &#125;;</div><div class="line">    &#125;(),</div><div class="line">    <span class="attr">language</span>:(navigator.browserLanguage || navigator.language).toLowerCase()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h3><p>因为需求上要求引导用户到APP指定页面，所以链接还需要带上参数id，进入页面后再拿id拼URL Schema<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var id = GetQueryString("id")?GetQueryString("id"):'';</div><div class="line">var hostUrl = window.location.host;</div><div class="line">var protocol = window.location.protocol;</div><div class="line">var appUrl = "schema://path/'+id</div><div class="line">openAppFunc();    </div><div class="line"></div><div class="line">// 网上扒的获取url携带参数方法</div><div class="line">function GetQueryString(name)</div><div class="line">&#123;</div><div class="line">    var reg = new RegExp("(^|&amp;)"+ name +"=([^&amp;]*)(&amp;|$)");</div><div class="line">    var r = window.location.search.substr(1).match(reg);</div><div class="line">    if(r!=null)return  unescape(r[2]); return  '';</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>方法的实现主要就是前面说的判断逻辑，至于HTML就不贴了，在安卓上仿了个iOS的风格的弹窗<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">openAppFunc</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(browser.versions.wechat)&#123;</div><div class="line">            $(<span class="string">".weixin-tip"</span>).css(<span class="string">"display"</span>,<span class="string">"block"</span>);  <span class="comment">//这里做了个针对微信显示提示语的处理</span></div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">if</span>(browser.versions.android &amp;&amp; browser.versions.mobile)&#123;</div><div class="line">                $(<span class="string">'#alertBox'</span>).css(<span class="string">'display'</span>,<span class="string">'block'</span>);   <span class="comment">//针对Android设备显示假弹框</span></div><div class="line">                $(<span class="string">".yesBtn"</span>).attr(<span class="string">"href"</span>,appUrl);  <span class="comment">//确定按钮指向Android的URL schema</span></div><div class="line">                $(<span class="string">".noBtn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                    $(<span class="string">'#alertBox'</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);   <span class="comment">//隐藏假弹框</span></div><div class="line">                    $(<span class="string">'#downBox'</span>).css(<span class="string">'display'</span>,<span class="string">'block'</span>);   <span class="comment">//显示广告文字和下载按钮</span></div><div class="line">                &#125;)</div><div class="line">                <span class="comment">//Android也做延时跳转处理，如果设备未安装APP，即使点击确认按钮也会跳转至商店页面</span></div><div class="line">                $(<span class="string">".yesBtn"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                        <span class="built_in">window</span>.location = <span class="string">'https://Google Play'</span>;</div><div class="line">                    &#125;,<span class="number">500</span>);</div><div class="line">                &#125;)</div><div class="line">                $(<span class="string">".downBtn"</span>).attr(<span class="string">"href"</span>,<span class="string">"https://Google Play"</span>);   <span class="comment">//下载按钮指向Google Play</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>((browser.versions.iPhone || browser.versions.iPad) &amp;&amp; browser.versions.mobile)&#123;</div><div class="line">                <span class="comment">//倒也可以在这里调一次iOS的URL schema，但因为没有做延时跳转，设备未安装APP的情况下，Safari的报错无法自动消失</span></div><div class="line">                <span class="comment">//window.location = appUrl; </span></div><div class="line">                $(<span class="string">'#downBox'</span>).css(<span class="string">'display'</span>,<span class="string">'block'</span>);   <span class="comment">//显示广告文字和下载按钮</span></div><div class="line">                $(<span class="string">".downBtn"</span>).attr(<span class="string">"href"</span>,<span class="string">"App Store"</span>);  <span class="comment">//下载按钮指向App Store     </span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                $(<span class="string">'#downBox'</span>).css(<span class="string">'display'</span>,<span class="string">'block'</span>);    <span class="comment">//显示广告文字和下载按钮</span></div><div class="line">                $(<span class="string">".downBtn"</span>).attr(<span class="string">"href"</span>,<span class="string">"https://website"</span>);     <span class="comment">//下载按钮指向官网</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>上面的方案实现之后，效果还行，不过在联调时又遇到了一个不算问题的问题：短信发送的链接本来是在使用Google的短链接服务，不过这样的短链接Universal Link可识别不了，所以只好找笨办法，换用domain.com/s/{id}的形式，也算是“短链接”了，但因为前面做好了不想再改，而且这样的链接也不好拿参数id，于是就从Nginx上下手了，加了条配置——<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> location ^~ /s/ &#123;                                                                                      </div><div class="line">    rewrite  ^/(.+)/(\d+)  /pagename.html?id=$2  permanent;   </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>让domain.com/s/{id}形式的链接全部转到上面的静态页面，这样，既不耽误Universal Link，Android也能正常使用，可喜可贺，可喜可贺！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/frontEnd/" rel="tag"># frontEnd</a>
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+            <a href="/tags/deeplink/" rel="tag"># deeplink</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58a50b70d81939f4" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="phuud" />
+          <p class="site-author-name" itemprop="name">phuud</p>
+          <p class="site-description motion-element" itemprop="description">那么回事儿</p>
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://www.twitter.com/zuxic" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/phuud" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://bangumi.tv/user/40422" target="_blank" title="Bangumi">
+                  
+                    <i class="fa fa-fw fa-film"></i>
+                  
+                  Bangumi
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.instagram.com/zuxic" target="_blank" title="Instagram">
+                  
+                    <i class="fa fa-fw fa-instagram"></i>
+                  
+                  Instagram
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定方案"><span class="nav-number">1.</span> <span class="nav-text">确定方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设备识别"><span class="nav-number">2.</span> <span class="nav-text">设备识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#业务流程"><span class="nav-number">3.</span> <span class="nav-text">业务流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">4.</span> <span class="nav-text">补充</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">phuud</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'phuud';
+      var disqus_identifier = 'archives/Using-Deep-Link/';
+
+      var disqus_title = "一种可行的Deeplink简单实现";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RW2DrTYXMrTci83cP1ey8RAa-gzGzoHsz", "8JXDNg3LsvdOWtN4wn9nghaE");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.0"></script>
+
+
+
+</body>
+</html>
