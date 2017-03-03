@@ -3,25 +3,9 @@
 
 
     
-    
-  <url>
-    <loc>http://blog.phuud.info/archives/hello-world/</loc>
-    <lastmod>2017-02-28T07:45:02.519Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2017-01-01T12:57:39.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
   <url>
     <loc>http://blog.phuud.info/archives/Using-Deep-Link/</loc>
-    <lastmod>2017-02-28T07:45:02.518Z</lastmod>
+    <lastmod>2017-03-03T12:17:16.225Z</lastmod>
     <data>
         <display>
         <title>一种可行的Deeplink简单实现</title>
@@ -33,6 +17,22 @@
          
         <tag>deeplink</tag>
          
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://blog.phuud.info/archives/hello-world/</loc>
+    <lastmod>2017-02-28T07:45:02.519Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-01-01T12:57:39.000Z</pubTime>
+        
          
            
         </display>
