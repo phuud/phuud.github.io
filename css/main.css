@@ -979,7 +979,7 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
-  background: url("/images/header-bg2.png");
+  background: url("/images/header-bg2.png") repeat-x;
 }
 .header-inner {
   position: relative;
@@ -1706,7 +1706,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ad9cff;
+  background: #14ccf7;
 }
 .links-of-blogroll {
   font-size: 13px;

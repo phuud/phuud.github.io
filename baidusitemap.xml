@@ -4,18 +4,39 @@
 
     
   <url>
+    <loc>http://blog.phuud.info/archives/Using-grunt-to-build-in-different-environment/</loc>
+    <lastmod>2017-04-12T09:38:56.922Z</lastmod>
+    <data>
+        <display>
+        <title>Grunt笔记——根据部署环境配置不同参数</title>
+        <pubTime>2017-03-09T14:05:43.000Z</pubTime>
+        
+        <tag>FrontEnd</tag>
+         
+        <tag>JS</tag>
+         
+        <tag>Grunt</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.phuud.info/archives/Using-Deep-Link/</loc>
-    <lastmod>2017-03-06T09:15:32.278Z</lastmod>
+    <lastmod>2017-04-12T08:10:43.222Z</lastmod>
     <data>
         <display>
         <title>一种可行的Deeplink简单实现</title>
         <pubTime>2017-02-15T12:57:39.000Z</pubTime>
         
-        <tag>frontEnd</tag>
+        <tag>FrontEnd</tag>
          
-        <tag>js</tag>
+        <tag>JS</tag>
          
-        <tag>deeplink</tag>
+        <tag>Deeplink</tag>
          
          
            
