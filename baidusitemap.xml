@@ -4,14 +4,16 @@
 
     
   <url>
-    <loc>http://blog.phuud.info/archives/Github-Avatar-not-showing-on-commits-list/</loc>
-    <lastmod>2017-05-17T10:46:42.712Z</lastmod>
+    <loc>http://blog.phuud.info/archives/Using-exifjs-to-rotate-picture/</loc>
+    <lastmod>2017-06-20T10:19:15.029Z</lastmod>
     <data>
         <display>
-        <title>GitHub错误提交记录的修复</title>
-        <pubTime>2017-03-15T12:11:33.000Z</pubTime>
+        <title>Exif.js - 根据Exif信息控制图片的旋转</title>
+        <pubTime>2017-04-18T10:33:22.000Z</pubTime>
         
-        <tag>Github</tag>
+        <tag>FrontEnd</tag>
+         
+        <tag>JS</tag>
          
          
            
@@ -22,10 +24,10 @@
     
   <url>
     <loc>http://blog.phuud.info/archives/Using-grunt-to-build-in-different-environment/</loc>
-    <lastmod>2017-04-12T09:38:56.922Z</lastmod>
+    <lastmod>2017-06-20T09:17:16.824Z</lastmod>
     <data>
         <display>
-        <title>Grunt笔记——根据部署环境配置不同参数</title>
+        <title>Grunt笔记 - 根据部署环境配置不同参数</title>
         <pubTime>2017-03-09T14:05:43.000Z</pubTime>
         
         <tag>FrontEnd</tag>
@@ -33,6 +35,23 @@
         <tag>JS</tag>
          
         <tag>Grunt</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.phuud.info/archives/Github-Avatar-not-showing-on-commits-list/</loc>
+    <lastmod>2017-05-17T10:46:42.712Z</lastmod>
+    <data>
+        <display>
+        <title>GitHub错误提交记录的修复</title>
+        <pubTime>2017-03-15T12:11:33.000Z</pubTime>
+        
+        <tag>Github</tag>
          
          
            
@@ -62,19 +81,4 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://blog.phuud.info/archives/hello-world/</loc>
-    <lastmod>2017-02-28T07:45:02.519Z</lastmod>
-    <data>
-        <display>
-        <title>Hello World</title>
-        <pubTime>2017-01-01T12:57:39.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
 </urlset>
