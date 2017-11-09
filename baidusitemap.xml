@@ -4,6 +4,25 @@
 
     
   <url>
+    <loc>http://blog.phuud.info/archives/Using-ImageMagick-create-progressive-jpeg-in-batches/</loc>
+    <lastmod>2017-11-09T11:22:19.056Z</lastmod>
+    <data>
+        <display>
+        <title>ImageMagick - 批量生成渐进式图片</title>
+        <pubTime>2017-10-27T13:05:43.000Z</pubTime>
+        
+        <tag>FrontEnd</tag>
+         
+        <tag>Web-optimization</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.phuud.info/archives/Using-exifjs-to-rotate-picture/</loc>
     <lastmod>2017-06-20T10:19:15.029Z</lastmod>
     <data>
@@ -45,7 +64,7 @@
     
   <url>
     <loc>http://blog.phuud.info/archives/Github-Avatar-not-showing-on-commits-list/</loc>
-    <lastmod>2017-05-17T10:46:42.712Z</lastmod>
+    <lastmod>2017-05-17T10:46:42.713Z</lastmod>
     <data>
         <display>
         <title>GitHub错误提交记录的修复</title>
