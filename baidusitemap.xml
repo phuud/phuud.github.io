@@ -4,6 +4,27 @@
 
     
   <url>
+    <loc>http://blog.phuud.info/archives/Using-nginx-as-websocket-proxy/</loc>
+    <lastmod>2017-12-18T12:46:55.415Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx反向代理WebSocket实现WSS</title>
+        <pubTime>2017-12-17T09:25:11.000Z</pubTime>
+        
+        <tag>FrontEnd</tag>
+         
+        <tag>Nginx</tag>
+         
+        <tag>WebSocket</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://blog.phuud.info/archives/Using-ImageMagick-create-progressive-jpeg-in-batches/</loc>
     <lastmod>2017-11-09T11:22:19.056Z</lastmod>
     <data>
