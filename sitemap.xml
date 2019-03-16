@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.phuud.info/archives/Agile-Development-with-Github/</loc>
+    
+    <lastmod>2019-03-16T07:52:54.255Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.phuud.info/archives/Download-file-instead-of-open-in-browser-from-S3-url/</loc>
     
     <lastmod>2018-12-11T08:15:08.881Z</lastmod>
